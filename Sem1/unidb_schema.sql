@@ -1,7 +1,7 @@
 CREATE TABLE activity_type (
  activity_id CHAR(10) NOT NULL,
  activity_type CHAR(20),
- factor CHAR(10)
+ factor DECIMAL(2)
 );
 
 ALTER TABLE activity_type ADD CONSTRAINT PK_activity_type PRIMARY KEY (activity_id);
@@ -10,10 +10,10 @@ ALTER TABLE activity_type ADD CONSTRAINT PK_activity_type PRIMARY KEY (activity_
 CREATE TABLE course_layout (
  course_code CHAR(10) NOT NULL,
  course_name CHAR(50),
- hp INT,
+ hp DECIMAL(2),
  min_students INT,
  max_students INT,
- valid_from CHAR(10)
+ valid_from DATE NOT NULL
 );
 
 ALTER TABLE course_layout ADD CONSTRAINT PK_course_layout PRIMARY KEY (course_code);
@@ -56,7 +56,7 @@ CREATE TABLE course_instance (
 ALTER TABLE course_instance ADD CONSTRAINT PK_course_instance PRIMARY KEY (instance_id);
 
 
-CREATE TABLE teacher (
+CREATE TABLE employee (
  teacher_id CHAR(10) NOT NULL,
  dept_id CHAR(10) NOT NULL,
  is_teacher VARCHAR(5),
@@ -65,7 +65,7 @@ CREATE TABLE teacher (
  skill_set_id CHAR(10) NOT NULL
 );
 
-ALTER TABLE teacher ADD CONSTRAINT PK_teacher PRIMARY KEY (teacher_id);
+ALTER TABLE employee ADD CONSTRAINT PK_employee PRIMARY KEY (teacher_id);
 
 
 CREATE TABLE planned_activities (
@@ -79,9 +79,9 @@ ALTER TABLE planned_activities ADD CONSTRAINT PK_planned_activities PRIMARY KEY 
 
 CREATE TABLE salary (
  teacher_id CHAR(10) NOT NULL,
- salary CHAR(10),
- valid_from CHAR(10),
- valid_to CHAR(10)
+ salary INT,
+ valid_from DATE,
+ valid_to DATE
 );
 
 ALTER TABLE salary ADD CONSTRAINT PK_salary PRIMARY KEY (teacher_id);
@@ -108,22 +108,22 @@ ALTER TABLE allocation ADD CONSTRAINT PK_allocation PRIMARY KEY (allocation_id);
 ALTER TABLE course_instance ADD CONSTRAINT FK_course_instance_0 FOREIGN KEY (course_code) REFERENCES course_layout (course_code);
 
 
-ALTER TABLE teacher ADD CONSTRAINT FK_teacher_0 FOREIGN KEY (dept_id) REFERENCES department (dept_id);
-ALTER TABLE teacher ADD CONSTRAINT FK_teacher_1 FOREIGN KEY (person_id) REFERENCES person (person_id);
-ALTER TABLE teacher ADD CONSTRAINT FK_teacher_2 FOREIGN KEY (skill_set_id) REFERENCES skill_set (skill_set_id);
+ALTER TABLE employee ADD CONSTRAINT FK_employee_0 FOREIGN KEY (dept_id) REFERENCES department (dept_id);
+ALTER TABLE employee ADD CONSTRAINT FK_employee_1 FOREIGN KEY (person_id) REFERENCES person (person_id);
+ALTER TABLE employee ADD CONSTRAINT FK_employee_2 FOREIGN KEY (skill_set_id) REFERENCES skill_set (skill_set_id);
 
 
 ALTER TABLE planned_activities ADD CONSTRAINT FK_planned_activities_0 FOREIGN KEY (instance_id) REFERENCES course_instance (instance_id);
 ALTER TABLE planned_activities ADD CONSTRAINT FK_planned_activities_1 FOREIGN KEY (activity_id) REFERENCES activity_type (activity_id);
 
 
-ALTER TABLE salary ADD CONSTRAINT FK_salary_0 FOREIGN KEY (teacher_id) REFERENCES teacher (teacher_id);
+ALTER TABLE salary ADD CONSTRAINT FK_salary_0 FOREIGN KEY (teacher_id) REFERENCES employee (teacher_id);
 
 
 ALTER TABLE skill ADD CONSTRAINT FK_skill_0 FOREIGN KEY (skill_set_id) REFERENCES skill_set (skill_set_id);
 
 
 ALTER TABLE allocation ADD CONSTRAINT FK_allocation_0 FOREIGN KEY (instance_id) REFERENCES course_instance (instance_id);
-ALTER TABLE allocation ADD CONSTRAINT FK_allocation_1 FOREIGN KEY (teacher_id) REFERENCES teacher (teacher_id);
+ALTER TABLE allocation ADD CONSTRAINT FK_allocation_1 FOREIGN KEY (teacher_id) REFERENCES employee (teacher_id);
 
 
