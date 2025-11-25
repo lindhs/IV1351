@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict lAExuslgOOcrkwFWJaKhqRWEnq4CE9WiheRRSBaXTbjOc4KO07hsd3JywE2AeJP
+\restrict GsA4yaalXfUmYRkGrwMdtMmtInzMrOVYaAiQXrUb2FCqMfN5g83aPVJfhOg8bIt
 
 -- Dumped from database version 18.0 (Postgres.app)
 -- Dumped by pg_dump version 18.0 (Postgres.app)
@@ -23,19 +23,16 @@ SET row_security = off;
 -- Data for Name: activity_type; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.activity_type VALUES ('LAB1      ', 'Laboration 1        ', 1);
-INSERT INTO public.activity_type VALUES ('LABA      ', 'Laboration A        ', 1);
-INSERT INTO public.activity_type VALUES ('LABB      ', 'Laboration B        ', 1);
-INSERT INTO public.activity_type VALUES ('INL1      ', 'Inlämningsuppgift   ', 1);
-INSERT INTO public.activity_type VALUES ('TEN1      ', 'Tentamen            ', 2);
-INSERT INTO public.activity_type VALUES ('TENA      ', 'Skriftlig tenta     ', 2);
+INSERT INTO public.activity_type VALUES ('ACT0000001', 'Lecture             ', 2);
+INSERT INTO public.activity_type VALUES ('ACT0000002', 'Lab                 ', 1);
+INSERT INTO public.activity_type VALUES ('ACT0000004', 'Seminar             ', 1);
+INSERT INTO public.activity_type VALUES ('ACT0000003', 'Tutorial            ', 2);
 
 
 --
 -- Data for Name: course_layout; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.course_layout VALUES ('SF0003    ', 'Introduktion i matematik                          ', 2, 10, 100, '2024-08-23');
 INSERT INTO public.course_layout VALUES ('SF1689    ', 'Baskurs i matematik                               ', 6, 10, 120, '2024-10-21');
 INSERT INTO public.course_layout VALUES ('II1308    ', 'Introduktion till programmering                   ', 2, 20, 150, '2024-10-22');
 INSERT INTO public.course_layout VALUES ('IE1204    ', 'Digital design                                    ', 8, 10, 120, '2024-10-24');
@@ -49,43 +46,51 @@ INSERT INTO public.course_layout VALUES ('SF1686    ', 'Flervariabelanalys      
 INSERT INTO public.course_layout VALUES ('IS1200    ', 'Datorteknik, grundkurs                            ', 8, 20, 200, '2025-09-01');
 INSERT INTO public.course_layout VALUES ('IV1351    ', 'Datalagring                                       ', 8, 20, 200, '2025-09-01');
 INSERT INTO public.course_layout VALUES ('ME1003    ', 'Industriell ekonomi, grundkurs                    ', 6, 20, 200, '2025-09-01');
+INSERT INTO public.course_layout VALUES ('SF0003    ', 'Introduktion i matematik                          ', 3, 10, 100, '2024-08-23');
 
 
 --
 -- Data for Name: course_instance; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.course_instance VALUES ('CI00000001', 60, 1, 2024, 'SF0003    ');
-INSERT INTO public.course_instance VALUES ('CI00000002', 80, 1, 2024, 'II1308    ');
-INSERT INTO public.course_instance VALUES ('CI00000003', 45, 2, 2024, 'IE1204    ');
-INSERT INTO public.course_instance VALUES ('CI00000004', 75, 2, 2025, 'ID1018    ');
-INSERT INTO public.course_instance VALUES ('CI00000005', 70, 3, 2025, 'ID1021    ');
-INSERT INTO public.course_instance VALUES ('CI00000006', 65, 2, 2025, 'SF1624    ');
-INSERT INTO public.course_instance VALUES ('CI00000007', 60, 4, 2025, 'SF1610    ');
-INSERT INTO public.course_instance VALUES ('CI00000008', 55, 4, 2025, 'SF1625    ');
-INSERT INTO public.course_instance VALUES ('CI00000009', 50, 1, 2025, 'IS1200    ');
-INSERT INTO public.course_instance VALUES ('CI00000010', 40, 3, 2025, 'IV1351    ');
+INSERT INTO public.course_instance VALUES ('CINST00001', 95, 3, 2025, 'ID1018    ');
+INSERT INTO public.course_instance VALUES ('CINST00002', 80, 4, 2025, 'ID1021    ');
+INSERT INTO public.course_instance VALUES ('CINST00003', 60, 2, 2024, 'SF1689    ');
+INSERT INTO public.course_instance VALUES ('CINST00004', 130, 2, 2024, 'II1308    ');
+INSERT INTO public.course_instance VALUES ('CINST00005', 70, 2, 2024, 'IE1204    ');
+INSERT INTO public.course_instance VALUES ('CINST00006', 85, 3, 2025, 'SF1624    ');
+INSERT INTO public.course_instance VALUES ('CINST00007', 90, 4, 2025, 'SF1610    ');
+INSERT INTO public.course_instance VALUES ('CINST00008', 100, 4, 2025, 'SF1625    ');
+INSERT INTO public.course_instance VALUES ('CINST00009', 65, 4, 2025, 'IE1206    ');
+INSERT INTO public.course_instance VALUES ('CINST00010', 75, 2, 2025, 'SF1686    ');
+INSERT INTO public.course_instance VALUES ('CINST00011', 110, 1, 2025, 'IS1200    ');
+INSERT INTO public.course_instance VALUES ('CINST00012', 70, 1, 2025, 'IV1351    ');
+INSERT INTO public.course_instance VALUES ('CINST00013', 95, 1, 2025, 'ME1003    ');
+INSERT INTO public.course_instance VALUES ('CINST00014', 55, 1, 2024, 'SF0003    ');
 
 
 --
 -- Data for Name: department; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.department VALUES ('D000000001', 'Matematik           ', 'T000000001          ');
-INSERT INTO public.department VALUES ('D000000002', 'Datateknik          ', 'T000000002          ');
-INSERT INTO public.department VALUES ('D000000003', 'Elektroteknik       ', 'T000000003          ');
+INSERT INTO public.department VALUES ('DEPT000001', 'Matematik           ', 'EMP0000001          ');
+INSERT INTO public.department VALUES ('DEPT000002', 'Datateknik          ', 'EMP0000003          ');
+INSERT INTO public.department VALUES ('DEPT000003', 'Elektroteknik       ', 'EMP0000005          ');
+INSERT INTO public.department VALUES ('DEPT000004', 'Industriell eko     ', 'EMP0000006          ');
 
 
 --
 -- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.person VALUES ('P000000001', 'Anna                          ', 'Andersson                     ', 'anna.andersson@uni.se                             ');
-INSERT INTO public.person VALUES ('P000000002', 'Bjorn                         ', 'Berg                          ', 'bjorn.berg@uni.se                                 ');
-INSERT INTO public.person VALUES ('P000000003', 'Cecilia                       ', 'Carlsson                      ', 'cecilia.carlsson@uni.se                           ');
-INSERT INTO public.person VALUES ('P000000004', 'David                         ', 'Dahl                          ', 'david.dahl@uni.se                                 ');
-INSERT INTO public.person VALUES ('P000000005', 'Eva                           ', 'Ek                            ', 'eva.ek@uni.se                                     ');
-INSERT INTO public.person VALUES ('P000000006', 'Fredrik                       ', 'Fors                          ', 'fredrik.fors@uni.se                               ');
+INSERT INTO public.person VALUES ('PERS000001', 'Anna                          ', 'Berg                          ', 'anna.berg@university.se                           ');
+INSERT INTO public.person VALUES ('PERS000002', 'Erik                          ', 'Lind                          ', 'erik.lind@university.se                           ');
+INSERT INTO public.person VALUES ('PERS000003', 'Sara                          ', 'Nilsson                       ', 'sara.nilsson@university.se                        ');
+INSERT INTO public.person VALUES ('PERS000004', 'Jonas                         ', 'Ek                            ', 'jonas.ek@university.se                            ');
+INSERT INTO public.person VALUES ('PERS000005', 'Karin                         ', 'Sjoberg                       ', 'karin.sjoberg@university.se                       ');
+INSERT INTO public.person VALUES ('PERS000006', 'Lars                          ', 'Holm                          ', 'lars.holm@university.se                           ');
+INSERT INTO public.person VALUES ('PERS000007', 'Maria                         ', 'Akesson                       ', 'maria.akesson@university.se                       ');
+INSERT INTO public.person VALUES ('PERS000008', 'Oskar                         ', 'Dahl                          ', 'oskar.dahl@university.se                          ');
 
 
 --
@@ -95,82 +100,127 @@ INSERT INTO public.person VALUES ('P000000006', 'Fredrik                       '
 INSERT INTO public.skill_set VALUES ('SS00000001');
 INSERT INTO public.skill_set VALUES ('SS00000002');
 INSERT INTO public.skill_set VALUES ('SS00000003');
+INSERT INTO public.skill_set VALUES ('SS00000004');
+INSERT INTO public.skill_set VALUES ('SS00000005');
+INSERT INTO public.skill_set VALUES ('SS00000006');
+INSERT INTO public.skill_set VALUES ('SS00000007');
+INSERT INTO public.skill_set VALUES ('SS00000008');
 
 
 --
 -- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.employee VALUES ('T000000001', 'D000000001', 'true', 'Lektor                        ', 'P000000001', 'SS00000001');
-INSERT INTO public.employee VALUES ('T000000002', 'D000000002', 'true', 'Professor                     ', 'P000000002', 'SS00000002');
-INSERT INTO public.employee VALUES ('T000000003', 'D000000003', 'true', 'Adjunkt                       ', 'P000000003', 'SS00000003');
-INSERT INTO public.employee VALUES ('T000000004', 'D000000002', 'true', 'Lektor                        ', 'P000000004', 'SS00000002');
-INSERT INTO public.employee VALUES ('T000000005', 'D000000001', 'true', 'Adjunkt                       ', 'P000000005', 'SS00000001');
+INSERT INTO public.employee VALUES ('EMP0000001', 'DEPT000001', 'true', 'Professor                     ', 'PERS000001', 'SS00000001');
+INSERT INTO public.employee VALUES ('EMP0000002', 'DEPT000001', 'true', 'Lektor                        ', 'PERS000002', 'SS00000002');
+INSERT INTO public.employee VALUES ('EMP0000003', 'DEPT000002', 'true', 'Lektor                        ', 'PERS000003', 'SS00000003');
+INSERT INTO public.employee VALUES ('EMP0000004', 'DEPT000002', 'true', 'Adjunkt                       ', 'PERS000004', 'SS00000004');
+INSERT INTO public.employee VALUES ('EMP0000005', 'DEPT000003', 'true', 'Lektor                        ', 'PERS000005', 'SS00000005');
+INSERT INTO public.employee VALUES ('EMP0000006', 'DEPT000004', 'true', 'Lektor                        ', 'PERS000006', 'SS00000006');
+INSERT INTO public.employee VALUES ('EMP0000007', 'DEPT000002', 'true', 'Professor                     ', 'PERS000007', 'SS00000007');
+INSERT INTO public.employee VALUES ('EMP0000008', 'DEPT000001', 'true', 'Adjunkt                       ', 'PERS000008', 'SS00000008');
 
 
 --
 -- Data for Name: allocation; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.allocation VALUES ('A000000001', 'CI00000001', 'T000000001');
-INSERT INTO public.allocation VALUES ('A000000002', 'CI00000002', 'T000000002');
-INSERT INTO public.allocation VALUES ('A000000003', 'CI00000003', 'T000000003');
-INSERT INTO public.allocation VALUES ('A000000004', 'CI00000004', 'T000000002');
-INSERT INTO public.allocation VALUES ('A000000005', 'CI00000005', 'T000000004');
-INSERT INTO public.allocation VALUES ('A000000006', 'CI00000006', 'T000000001');
-INSERT INTO public.allocation VALUES ('A000000007', 'CI00000007', 'T000000005');
-INSERT INTO public.allocation VALUES ('A000000008', 'CI00000008', 'T000000005');
-INSERT INTO public.allocation VALUES ('A000000009', 'CI00000009', 'T000000003');
-INSERT INTO public.allocation VALUES ('A000000010', 'CI00000010', 'T000000004');
+INSERT INTO public.allocation VALUES ('ALLOC00001', 'CINST00001', 'EMP0000003');
+INSERT INTO public.allocation VALUES ('ALLOC00002', 'CINST00001', 'EMP0000004');
+INSERT INTO public.allocation VALUES ('ALLOC00003', 'CINST00002', 'EMP0000003');
+INSERT INTO public.allocation VALUES ('ALLOC00004', 'CINST00002', 'EMP0000007');
+INSERT INTO public.allocation VALUES ('ALLOC00005', 'CINST00003', 'EMP0000001');
+INSERT INTO public.allocation VALUES ('ALLOC00006', 'CINST00004', 'EMP0000004');
+INSERT INTO public.allocation VALUES ('ALLOC00007', 'CINST00005', 'EMP0000005');
+INSERT INTO public.allocation VALUES ('ALLOC00008', 'CINST00006', 'EMP0000001');
+INSERT INTO public.allocation VALUES ('ALLOC00009', 'CINST00007', 'EMP0000002');
+INSERT INTO public.allocation VALUES ('ALLOC00010', 'CINST00008', 'EMP0000002');
+INSERT INTO public.allocation VALUES ('ALLOC00011', 'CINST00009', 'EMP0000005');
+INSERT INTO public.allocation VALUES ('ALLOC00012', 'CINST00010', 'EMP0000001');
+INSERT INTO public.allocation VALUES ('ALLOC00013', 'CINST00011', 'EMP0000003');
+INSERT INTO public.allocation VALUES ('ALLOC00014', 'CINST00012', 'EMP0000007');
+INSERT INTO public.allocation VALUES ('ALLOC00015', 'CINST00013', 'EMP0000006');
+INSERT INTO public.allocation VALUES ('ALLOC00016', 'CINST00014', 'EMP0000002');
 
 
 --
 -- Data for Name: planned_activities; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.planned_activities VALUES ('CI00000001', 'TEN1      ', 20);
-INSERT INTO public.planned_activities VALUES ('CI00000002', 'LAB1      ', 15);
-INSERT INTO public.planned_activities VALUES ('CI00000002', 'TEN1      ', 25);
-INSERT INTO public.planned_activities VALUES ('CI00000003', 'LABA      ', 20);
-INSERT INTO public.planned_activities VALUES ('CI00000003', 'TENA      ', 30);
-INSERT INTO public.planned_activities VALUES ('CI00000004', 'LABB      ', 30);
-INSERT INTO public.planned_activities VALUES ('CI00000004', 'TEN1      ', 30);
-INSERT INTO public.planned_activities VALUES ('CI00000005', 'INL1      ', 35);
-INSERT INTO public.planned_activities VALUES ('CI00000005', 'TEN1      ', 25);
-INSERT INTO public.planned_activities VALUES ('CI00000006', 'TEN1      ', 30);
-INSERT INTO public.planned_activities VALUES ('CI00000007', 'TEN1      ', 25);
-INSERT INTO public.planned_activities VALUES ('CI00000008', 'TEN1      ', 25);
-INSERT INTO public.planned_activities VALUES ('CI00000009', 'LAB1      ', 20);
-INSERT INTO public.planned_activities VALUES ('CI00000009', 'TEN1      ', 20);
-INSERT INTO public.planned_activities VALUES ('CI00000010', 'INL1      ', 30);
+INSERT INTO public.planned_activities VALUES ('CINST00001', 'ACT0000001', 30);
+INSERT INTO public.planned_activities VALUES ('CINST00001', 'ACT0000002', 20);
+INSERT INTO public.planned_activities VALUES ('CINST00001', 'ACT0000003', 10);
+INSERT INTO public.planned_activities VALUES ('CINST00002', 'ACT0000001', 28);
+INSERT INTO public.planned_activities VALUES ('CINST00002', 'ACT0000002', 18);
+INSERT INTO public.planned_activities VALUES ('CINST00002', 'ACT0000003', 8);
+INSERT INTO public.planned_activities VALUES ('CINST00003', 'ACT0000001', 24);
+INSERT INTO public.planned_activities VALUES ('CINST00003', 'ACT0000003', 12);
+INSERT INTO public.planned_activities VALUES ('CINST00003', 'ACT0000004', 4);
+INSERT INTO public.planned_activities VALUES ('CINST00004', 'ACT0000001', 16);
+INSERT INTO public.planned_activities VALUES ('CINST00004', 'ACT0000002', 12);
+INSERT INTO public.planned_activities VALUES ('CINST00004', 'ACT0000003', 6);
+INSERT INTO public.planned_activities VALUES ('CINST00005', 'ACT0000001', 20);
+INSERT INTO public.planned_activities VALUES ('CINST00005', 'ACT0000002', 14);
+INSERT INTO public.planned_activities VALUES ('CINST00005', 'ACT0000003', 6);
+INSERT INTO public.planned_activities VALUES ('CINST00006', 'ACT0000001', 26);
+INSERT INTO public.planned_activities VALUES ('CINST00006', 'ACT0000003', 14);
+INSERT INTO public.planned_activities VALUES ('CINST00006', 'ACT0000004', 4);
+INSERT INTO public.planned_activities VALUES ('CINST00007', 'ACT0000001', 24);
+INSERT INTO public.planned_activities VALUES ('CINST00007', 'ACT0000003', 12);
+INSERT INTO public.planned_activities VALUES ('CINST00007', 'ACT0000004', 4);
+INSERT INTO public.planned_activities VALUES ('CINST00008', 'ACT0000001', 26);
+INSERT INTO public.planned_activities VALUES ('CINST00008', 'ACT0000003', 10);
+INSERT INTO public.planned_activities VALUES ('CINST00008', 'ACT0000004', 4);
+INSERT INTO public.planned_activities VALUES ('CINST00009', 'ACT0000001', 20);
+INSERT INTO public.planned_activities VALUES ('CINST00009', 'ACT0000002', 16);
+INSERT INTO public.planned_activities VALUES ('CINST00009', 'ACT0000003', 6);
+INSERT INTO public.planned_activities VALUES ('CINST00010', 'ACT0000001', 28);
+INSERT INTO public.planned_activities VALUES ('CINST00010', 'ACT0000003', 12);
+INSERT INTO public.planned_activities VALUES ('CINST00010', 'ACT0000004', 4);
+INSERT INTO public.planned_activities VALUES ('CINST00011', 'ACT0000001', 22);
+INSERT INTO public.planned_activities VALUES ('CINST00011', 'ACT0000002', 18);
+INSERT INTO public.planned_activities VALUES ('CINST00011', 'ACT0000003', 8);
+INSERT INTO public.planned_activities VALUES ('CINST00012', 'ACT0000001', 24);
+INSERT INTO public.planned_activities VALUES ('CINST00012', 'ACT0000002', 16);
+INSERT INTO public.planned_activities VALUES ('CINST00012', 'ACT0000003', 8);
+INSERT INTO public.planned_activities VALUES ('CINST00012', 'ACT0000004', 4);
+INSERT INTO public.planned_activities VALUES ('CINST00013', 'ACT0000001', 18);
+INSERT INTO public.planned_activities VALUES ('CINST00013', 'ACT0000004', 6);
+INSERT INTO public.planned_activities VALUES ('CINST00014', 'ACT0000001', 16);
+INSERT INTO public.planned_activities VALUES ('CINST00014', 'ACT0000003', 8);
 
 
 --
 -- Data for Name: salary; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.salary VALUES ('T000000001', 45000, '2024-01-01', '2024-12-31');
-INSERT INTO public.salary VALUES ('T000000002', 52000, '2024-01-01', '2024-12-31');
-INSERT INTO public.salary VALUES ('T000000003', 41000, '2024-01-01', '2024-12-31');
-INSERT INTO public.salary VALUES ('T000000004', 47000, '2024-01-01', '2024-12-31');
-INSERT INTO public.salary VALUES ('T000000005', 43000, '2024-01-01', '2024-12-31');
+INSERT INTO public.salary VALUES ('EMP0000001', 60000, '2025-01-01', NULL);
+INSERT INTO public.salary VALUES ('EMP0000002', 52000, '2025-01-01', NULL);
+INSERT INTO public.salary VALUES ('EMP0000003', 53000, '2025-01-01', NULL);
+INSERT INTO public.salary VALUES ('EMP0000004', 48000, '2025-01-01', NULL);
+INSERT INTO public.salary VALUES ('EMP0000005', 51000, '2025-01-01', NULL);
+INSERT INTO public.salary VALUES ('EMP0000006', 50000, '2025-01-01', NULL);
+INSERT INTO public.salary VALUES ('EMP0000007', 62000, '2025-01-01', NULL);
+INSERT INTO public.salary VALUES ('EMP0000008', 46000, '2025-01-01', NULL);
 
 
 --
 -- Data for Name: skill; Type: TABLE DATA; Schema: public; Owner: simonwagstrom
 --
 
-INSERT INTO public.skill VALUES ('SK00000001', 'Analys                                  ', 'SS00000001');
-INSERT INTO public.skill VALUES ('SK00000002', 'Algebra                                 ', 'SS00000001');
-INSERT INTO public.skill VALUES ('SK00000003', 'Programmering                           ', 'SS00000002');
-INSERT INTO public.skill VALUES ('SK00000004', 'Databaser                               ', 'SS00000002');
-INSERT INTO public.skill VALUES ('SK00000005', 'Elektronik                              ', 'SS00000003');
-INSERT INTO public.skill VALUES ('SK00000006', 'Digital design                          ', 'SS00000003');
+INSERT INTO public.skill VALUES ('SKILL00001', 'Matematik                               ', 'SS00000001');
+INSERT INTO public.skill VALUES ('SKILL00002', 'Analys                                  ', 'SS00000001');
+INSERT INTO public.skill VALUES ('SKILL00003', 'Programmering                           ', 'SS00000003');
+INSERT INTO public.skill VALUES ('SKILL00004', 'Algoritmer                              ', 'SS00000003');
+INSERT INTO public.skill VALUES ('SKILL00005', 'Digital design                          ', 'SS00000005');
+INSERT INTO public.skill VALUES ('SKILL00006', 'Elektronik                              ', 'SS00000005');
+INSERT INTO public.skill VALUES ('SKILL00007', 'Databaser                               ', 'SS00000007');
+INSERT INTO public.skill VALUES ('SKILL00008', 'Industriell eko                         ', 'SS00000006');
 
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict lAExuslgOOcrkwFWJaKhqRWEnq4CE9WiheRRSBaXTbjOc4KO07hsd3JywE2AeJP
+\unrestrict GsA4yaalXfUmYRkGrwMdtMmtInzMrOVYaAiQXrUb2FCqMfN5g83aPVJfhOg8bIt
 
