@@ -173,13 +173,13 @@ JOIN course_instance AS ci ON ci.instance_id = al.instance_id
 JOIN employee        AS e  ON e.teacher_id   = al.teacher_id
 JOIN person          AS p  ON p.person_id    = e.person_id
 WHERE ci.year   = EXTRACT(YEAR FROM CURRENT_DATE)  -- current year
-  AND ci.period = 1                                -- <=== current period (P1 here, change as needed)
+  AND ci.period = 1                                -- current period
 GROUP BY
     e.teacher_id,
     p.first_name,
     p.last_name,
     ci.period
-HAVING COUNT(DISTINCT ci.instance_id) > 0          -- <=== "specific number" threshold (0 in example)
+HAVING COUNT(DISTINCT ci.instance_id) > 1       -- more or less than, keep low as not that much data inserted.
 ORDER BY
     ci.period,
     teacher_name;
