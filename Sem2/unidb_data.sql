@@ -1,16 +1,8 @@
-------------------------------------------------------------
--- ACTIVITY_TYPE
-------------------------------------------------------------
-
 INSERT INTO activity_type (activity_id, activity_type, factor) VALUES
   ('ACT0000001', 'Lecture',  2),
   ('ACT0000002', 'Lab',      1),
   ('ACT0000003', 'Tutorial', 2),
   ('ACT0000004', 'Seminar',  1);
-
-------------------------------------------------------------
--- SKILL
-------------------------------------------------------------
 
 INSERT INTO skill (skill_id, skill_type) VALUES
   ('SKILL00001', 'Matematik'),
@@ -22,10 +14,6 @@ INSERT INTO skill (skill_id, skill_type) VALUES
   ('SKILL00007', 'Databaser'),
   ('SKILL00008', 'IndEko');
 
-------------------------------------------------------------
--- PERSON
-------------------------------------------------------------
-
 INSERT INTO person (person_id, first_name, last_name) VALUES
   ('PERS000001', 'Anna',  'Berg'),
   ('PERS000002', 'Erik',  'Lind'),
@@ -35,10 +23,6 @@ INSERT INTO person (person_id, first_name, last_name) VALUES
   ('PERS000006', 'Lars',  'Holm'),
   ('PERS000007', 'Maria', 'Akesson'),
   ('PERS000008', 'Oskar', 'Dahl');
-
-------------------------------------------------------------
--- ADRESS
-------------------------------------------------------------
 
 INSERT INTO adress (adress_id, adress_type, adress) VALUES
   ('ADR000001', 'Home', 'Main Street 12'),
@@ -50,10 +34,6 @@ INSERT INTO adress (adress_id, adress_type, adress) VALUES
   ('ADR000007', 'Home', 'Akessonvägen 5'),
   ('ADR000008', 'Home', 'Dahlvägen 9');
 
-------------------------------------------------------------
--- EMAIL
-------------------------------------------------------------
-
 INSERT INTO email (email_id, email_type, email) VALUES
   ('EML000001', 'Work', 'anna.berg@university.se'),
   ('EML000002', 'Work', 'erik.lind@university.se'),
@@ -64,9 +44,6 @@ INSERT INTO email (email_id, email_type, email) VALUES
   ('EML000007', 'Work', 'maria.akesson@university.se'),
   ('EML000008', 'Work', 'oskar.dahl@university.se');
 
-------------------------------------------------------------
--- PHONE
-------------------------------------------------------------
 
 INSERT INTO phone (phone_id, phone_num, num_type) VALUES
   ('PHN000001', '0701001001', 'Mobile'),
@@ -78,9 +55,6 @@ INSERT INTO phone (phone_id, phone_num, num_type) VALUES
   ('PHN000007', '0707007007', 'Mobile'),
   ('PHN000008', '0708008008', 'Mobile');
 
-------------------------------------------------------------
--- PERSON_ADRESS
-------------------------------------------------------------
 
 INSERT INTO person_adress (adress_id, person_id) VALUES
   ('ADR000001', 'PERS000001'),
@@ -92,9 +66,6 @@ INSERT INTO person_adress (adress_id, person_id) VALUES
   ('ADR000007', 'PERS000007'),
   ('ADR000008', 'PERS000008');
 
-------------------------------------------------------------
--- PERSON_EMAIL
-------------------------------------------------------------
 
 INSERT INTO person_email (email_id, person_id) VALUES
   ('EML000001', 'PERS000001'),
@@ -106,10 +77,6 @@ INSERT INTO person_email (email_id, person_id) VALUES
   ('EML000007', 'PERS000007'),
   ('EML000008', 'PERS000008');
 
-------------------------------------------------------------
--- PERSON_PHONE
-------------------------------------------------------------
-
 INSERT INTO person_phone (person_id, phone_id) VALUES
   ('PERS000001', 'PHN000001'),
   ('PERS000002', 'PHN000002'),
@@ -120,19 +87,11 @@ INSERT INTO person_phone (person_id, phone_id) VALUES
   ('PERS000007', 'PHN000007'),
   ('PERS000008', 'PHN000008');
 
-------------------------------------------------------------
--- DEPARTMENT (manager_id left NULL to avoid cycle)
-------------------------------------------------------------
-
 INSERT INTO department (dept_id, dept_name, manager_id) VALUES
   ('DEPT000001', 'Matematik',  NULL),
   ('DEPT000002', 'Datateknik', NULL),
   ('DEPT000003', 'Elektrotek', NULL),
   ('DEPT000004', 'IndEko',     NULL);
-
-------------------------------------------------------------
--- EMPLOYEE
-------------------------------------------------------------
 
 INSERT INTO employee
   (teacher_id,  is_teacher, job_title,  dept_id,     person_id,   supervisor_id)
@@ -146,18 +105,6 @@ VALUES
   ('EMP0000007', 'true', 'Professor', 'DEPT000002', 'PERS000007', NULL),
   ('EMP0000008', 'true', 'Adjunkt',   'DEPT000001', 'PERS000008', NULL);
 
-------------------------------------------------------------
--- (OPTIONAL) SET MANAGERS IF YOU WANT THE CYCLE
--- Uncomment these if you’re okay with circular FKs when reloading data
--- UPDATE department SET manager_id = 'EMP0000001' WHERE dept_id = 'DEPT000001';
--- UPDATE department SET manager_id = 'EMP0000003' WHERE dept_id = 'DEPT000002';
--- UPDATE department SET manager_id = 'EMP0000005' WHERE dept_id = 'DEPT000003';
--- UPDATE department SET manager_id = 'EMP0000006' WHERE dept_id = 'DEPT000004';
-
-------------------------------------------------------------
--- SALARY
-------------------------------------------------------------
-
 INSERT INTO salary (valid_from,  teacher_id,  salary, valid_to) VALUES
   ('2025-01-01', 'EMP0000001', 60000, NULL),
   ('2025-01-01', 'EMP0000002', 52000, NULL),
@@ -168,32 +115,17 @@ INSERT INTO salary (valid_from,  teacher_id,  salary, valid_to) VALUES
   ('2025-01-01', 'EMP0000007', 62000, NULL),
   ('2025-01-01', 'EMP0000008', 46000, NULL);
 
-------------------------------------------------------------
--- SKILL_SET (teacher ↔ skill mapping)
-------------------------------------------------------------
-
 INSERT INTO skill_set (teacher_id, skill_id) VALUES
-  -- EMP0000001 had SS00000001 → SKILL00001, SKILL00002
   ('EMP0000001', 'SKILL00001'),
   ('EMP0000001', 'SKILL00002'),
-
-  -- EMP0000003 had SS00000003 → SKILL00003, SKILL00004
   ('EMP0000003', 'SKILL00003'),
   ('EMP0000003', 'SKILL00004'),
-
-  -- EMP0000005 had SS00000005 → SKILL00005, SKILL00006
   ('EMP0000005', 'SKILL00005'),
   ('EMP0000005', 'SKILL00006'),
-
-  -- EMP0000006 had SS00000006 → SKILL00008
   ('EMP0000006', 'SKILL00008'),
-
-  -- EMP0000007 had SS00000007 → SKILL00007
   ('EMP0000007', 'SKILL00007');
 
-------------------------------------------------------------
--- COURSE_LAYOUT
-------------------------------------------------------------
+
 
 INSERT INTO course_layout
   (course_code, valid_from,  course_name,                           hp, min_students, max_students, valid_to)
@@ -213,10 +145,6 @@ VALUES
   ('ME1003', '2025-09-01', 'Industriell ekonomi, grundkurs',         6, 20, 200, NULL),
   ('SF0003', '2024-08-23', 'Introduktion i matematik',               3, 10, 100, NULL);
 
-------------------------------------------------------------
--- COURSE_INSTANCE
-------------------------------------------------------------
-
 INSERT INTO course_instance
   (instance_id, num_students, period, year, course_code, course_valid_from)
 VALUES
@@ -235,10 +163,6 @@ VALUES
   ('CINST00013', 95, 1, 2025, 'ME1003', '2025-09-01'),
   ('CINST00014', 55, 1, 2024, 'SF0003', '2024-08-23');
 
-------------------------------------------------------------
--- PLANNED_ACTIVITIES
--- (activity_id, instance_id, planned_hours)
-------------------------------------------------------------
 
 INSERT INTO planned_activities (activity_id, instance_id, planned_hours) VALUES
   ('ACT0000001', 'CINST00001', 30),
@@ -295,11 +219,6 @@ INSERT INTO planned_activities (activity_id, instance_id, planned_hours) VALUES
 
   ('ACT0000001', 'CINST00014', 16),
   ('ACT0000003', 'CINST00014',  8);
-
-------------------------------------------------------------
--- ALLOCATION
--- (allocation_id, teacher_id, activity_id, instance_id)
-------------------------------------------------------------
 
 INSERT INTO allocation
   (allocation_id, teacher_id,  activity_id,  instance_id)
