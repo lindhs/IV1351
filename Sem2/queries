@@ -183,3 +183,85 @@ HAVING COUNT(DISTINCT ci.instance_id) > 0          -- <=== "specific number" thr
 ORDER BY
     ci.period,
     teacher_name;
+
+-- ANALYSIS PART, first we just analyze the query below of getting, then we create a materialized view of the same table, and analze that.
+
+
+EXPLAIN ANALYZE
+SELECT
+    ci.course_code,
+    ci.instance_id,
+    cl.hp,
+    ci.period,
+    ci.num_students,
+    SUM(CASE WHEN at.activity_type = 'Lecture'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS lecture_hours,
+    SUM(CASE WHEN at.activity_type = 'Tutorial'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS tutorial_hours,
+    SUM(CASE WHEN at.activity_type = 'Lab'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS lab_hours,
+    SUM(CASE WHEN at.activity_type = 'Seminar'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS seminar_hours,
+    SUM(CASE WHEN at.activity_type = 'Overhead'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS other_overhead_hours,
+    (2 * cl.hp + 28 + 0.2 * ci.num_students)               AS admin_hours,
+    (32 + 0.725 * ci.num_students)                         AS exam_hours,
+    -- for total hours
+    SUM(pa.planned_hours * at.factor)
+        + (2 * cl.hp + 28 + 0.2 * ci.num_students)
+        + (32 + 0.725 * ci.num_students)                   AS total_hours
+FROM course_instance      AS ci
+JOIN planned_activities   AS pa ON pa.instance_id = ci.instance_id
+JOIN activity_type        AS at ON at.activity_id = pa.activity_id
+JOIN course_layout        AS cl ON cl.course_code = ci.course_code
+WHERE ci.year = 2025
+GROUP BY
+    ci.course_code,
+    ci.instance_id,
+    cl.hp,
+    ci.period,
+    ci.num_students
+ORDER BY
+    ci.period,
+    ci.course_code;
+
+
+CREATE MATERIALIZED VIEW course_instance_hours AS
+SELECT
+    ci.course_code,
+    ci.instance_id,
+    ci.year        AS course_year,
+    ci.period,
+    ci.num_students,
+    cl.hp,
+    -- Break-down by activity type
+    SUM(CASE WHEN at.activity_type = 'Lecture'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS lecture_hours,
+    SUM(CASE WHEN at.activity_type = 'Tutorial'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS tutorial_hours,
+    SUM(CASE WHEN at.activity_type = 'Lab'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS lab_hours,
+    SUM(CASE WHEN at.activity_type = 'Seminar'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS seminar_hours,
+    SUM(CASE WHEN at.activity_type = 'Overhead'
+             THEN pa.planned_hours * at.factor ELSE 0 END) AS other_overhead_hours,
+    -- Instance-level formulas
+    (2 * cl.hp + 28 + 0.2  * ci.num_students)              AS admin_hours,
+    (32         + 0.725 * ci.num_students)                 AS exam_hours,
+    -- Total = all activities + admin + exam
+    SUM(pa.planned_hours * at.factor)
+      + (2 * cl.hp + 28 + 0.2  * ci.num_students)
+      + (32       + 0.725 * ci.num_students)               AS total_hours
+FROM course_instance    AS ci
+JOIN planned_activities AS pa ON pa.instance_id = ci.instance_id
+JOIN activity_type      AS at ON at.activity_id = pa.activity_id
+JOIN course_layout      AS cl ON cl.course_code = ci.course_code
+GROUP BY
+    ci.course_code,
+    ci.instance_id,
+    ci.year,
+    ci.period,
+    ci.num_students,
+    cl.hp;
+
+EXPLAIN ANALYZE SELECT * FROM course_instance_hours;
